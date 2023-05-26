@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <!-- *********** APPENDERS ******************************************** -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS}[%-5p] [%thread] %-5level %-40logger{40} [%-40.40c %6L]-%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+<!--    rolling file appender-->
+
+    <property name="LOGS" value="C:\\Users\\Marek Vu\\Desktop\\logs\\" />
+    <appender name="FILE-AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}testFile2.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{HH:mm:ss.SSS}[%-5le] [%thread] %-5level %logger{36} [%-40.40c %6L]-%m%n
+            </Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}logs-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP" />
+        </rollingPolicy>
+    </appender>
+
+
+    <!--    Custom file appender-->
+
+<!--    <appender name="file" class="ch.qos.logback.core.FileAppender">-->
+<!--        <file>C:\\Users\\Marek Vu\\Desktop\\logs\\Udemy.log</file>-->
+<!--        <encoder>-->
+<!--            <pattern>%d [%thread] %-5level %-40logger{40} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+
+    <!-- *********** LOGGERS ********************************************** -->
+    <!--    do not forget this settings-->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE-AUDIT"/>
+    </root>
+
+    <logger name="cz.syntea" level="INFO" />
+    <logger name="cz.syntea.gam.installer" level="DEBUG" />
+
+
+
+</configuration>
